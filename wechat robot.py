@@ -113,11 +113,30 @@ def gsearch(name,group):
             result.append(member.name)
     return result
 
+# ###查找聊天记录（登录后的）
 
 # In[72]:
+
+
+#记录消息类型、内容、发送人、接收时间
+def search(message):
+    bot.messages.max_history = 1000
+    meslist=[]
+    mesid=[]
+    m=bot.messages.search(message)
+    for mes in m:
+        #查找消息ID，若已加入，则不管（不循环运行没必要判断）
+        if med.id not in mesid:
+            mesid.append(mes.id)
+            meslist.append([mes.type,mes.text,mes.sender,mes.member,mes.receive_time.strftime("%Y-%m-%d %H:%M:%S")])
+    print(meslist)
+def recordsearch():
+    message=input('请输入查找信息：')
+    search(message)
 
 
 bot=Bot(cache_path=True)#console_qr=1
 #msend()#指定时间给指定好友、群发消息
 #gsearch(name,group)#查找群成员
+#recordsearch()#查找聊天记录(登录以后的)
 
